@@ -1,28 +1,28 @@
-// const weatherApi = require('./weatherApi');
+const WeatherApi = require("./weatherApi");
 
-class Weather{
-
-  constructor(apiObject){
+class Weather {
+  constructor(apiObject) {
     this.apiObject = apiObject;
-    this.weatherData = null;
   }
 
   fetch(city) {
-    this.apiObject.fetchWeatherData(city, (response) => {
-      this.weatherData = response;
+    this.apiObject.fetchWeatherData(city, (jsObject) => {
+      this.weatherData = jsObject;
     })
-  }
+  };
 
   getWeatherData() {
     return this.weatherData;
   }
-
 }
 
 module.exports = Weather;
 
+const newWeatherApi = new WeatherApi();
+const weather = new Weather(newWeatherApi);
+weather.fetch("London");
+console.log(weather.getWeatherData());
 
-
-
-
-
+// newWeatherApi.fetchWeatherData('London', (response) => {
+// console.log(response);
+// });
